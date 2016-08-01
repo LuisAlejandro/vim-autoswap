@@ -59,14 +59,12 @@ function! AS_HandleSwapfile (filename, swapname)
 
 	" Otherwise, if swapfile is older than file itself, just get rid of it...
 	elseif getftime(v:swapname) < getftime(a:filename)
-		call AS_DelayedMsg('Old swapfile detected... and deleted')
 		call delete(v:swapname)
 		let v:swapchoice = 'e'
 
-	" Otherwise, open file read-only...
+	" Otherwise, recover silently ...
 	else
-		call AS_DelayedMsg('Swapfile detected, opening read-only')
-		let v:swapchoice = 'o'
+		let v:swapchoice = 'r'
 	endif
 endfunction
 
